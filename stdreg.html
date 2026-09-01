@@ -1,1 +1,154 @@
-<h1>hello priya</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration Form</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f2f2f2;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+
+        form{
+            width:350px;
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 0 10px gray;
+        }
+
+        h2{
+            text-align:center;
+            color:green;
+        }
+
+        label{
+            display:block;
+            margin-top:10px;
+            font-weight:bold;
+        }
+
+        input{
+            width:100%;
+            padding:8px;
+            margin-top:5px;
+            box-sizing:border-box;
+        }
+
+        button{
+            width:100%;
+            margin-top:15px;
+            padding:10px;
+            background:green;
+            color:white;
+            border:none;
+            font-size:16px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:darkgreen;
+        }
+
+        #message{
+            margin-top:10px;
+            text-align:center;
+            font-weight:bold;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<form onsubmit="return validateForm()">
+
+    <h2>Student Registration</h2>
+
+    <label>Roll Number</label>
+    <input type="text" id="roll" placeholder="Enter Roll Number" required>
+
+    <label>First Name</label>
+    <input type="text" id="fname" placeholder="Enter First Name" required>
+
+    <label>Last Name</label>
+    <input type="text" id="lname" placeholder="Enter Last Name" required>
+
+    <label>Age</label>
+    <input type="number" id="age" placeholder="Enter Age" required>
+
+    <label>Email</label>
+    <input type="email" id="email" placeholder="Enter Email" required>
+
+    <label>Password</label>
+    <input type="password" id="password" placeholder="Enter Password" required>
+
+    <label>Phone Number</label>
+    <input type="text" id="phone" placeholder="Enter Phone Number" required>
+
+    <button type="submit">Register</button>
+
+    <p id="message"></p>
+
+</form>
+
+<script>
+
+function validateForm(){
+
+    let roll=document.getElementById("roll").value;
+    let age=document.getElementById("age").value;
+    let email=document.getElementById("email").value;
+    let password=document.getElementById("password").value;
+    let phone=document.getElementById("phone").value;
+    let message=document.getElementById("message");
+
+    let rollPattern=/^[A-Za-z0-9]+$/;
+    let emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let passwordPattern=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+    let phonePattern=/^[0-9]{10}$/;
+
+    if(!rollPattern.test(roll)){
+        message.innerHTML="Roll Number should contain only letters and numbers.";
+        message.style.color="red";
+        return false;
+    }
+
+    if(age<16 || age>100){
+        message.innerHTML="Age must be between 16 and 100.";
+        message.style.color="red";
+        return false;
+    }
+
+    if(!emailPattern.test(email)){
+        message.innerHTML="Enter a valid Email Address.";
+        message.style.color="red";
+        return false;
+    }
+
+    if(!passwordPattern.test(password)){
+        message.innerHTML="Password must be at least 8 characters with uppercase, lowercase, number and special character.";
+        message.style.color="red";
+        return false;
+    }
+
+    if(!phonePattern.test(phone)){
+        message.innerHTML="Phone Number must contain exactly 10 digits.";
+        message.style.color="red";
+        return false;
+    }
+
+    message.innerHTML="Student Registration Successful!";
+    message.style.color="green";
+
+    return false;
+}
+
+</script>
+
+</body>
+</html>
